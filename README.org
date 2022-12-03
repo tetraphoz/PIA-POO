@@ -1,0 +1,13 @@
+#+title: Reproductor de videos
+
+* Leer antes de correr
+Antes de poder correr el proyecto, es necesario tener la siguiente base de datos
+#+begin_src sql
+create database pia;
+use pia;
+CREATE TABLE user  (iduser INT AUTO_INCREMENT PRIMARY KEY, username VARCHAR(45) NOT NULL, password VARCHAR(16) NOT NULL);
+CREATE TABLE video (iduser INT AUTO_INCREMENT PRIMARY KEY, username VARCHAR(45) NOT NULL, password VARCHAR(16) NOT NULL);
+#+end_src
+
+El código no tiene un nombre de usuario o contraseña default para la base de datos.
+Por favor modifique el archivo Database.java con la información adecuada.
