@@ -17,13 +17,6 @@ public class Video {
 		this.imagePath = imagePath;
 	}
 
-	public Video(String name, String artist, Path videoPath, Path imagePath){
-		this.name = name;
-		this.artist = artist;
-		this.videoPath = videoPath;
-		this.imagePath = imagePath;
-	}
-
 	public int getIdVideo() {
 		return idVideo;
 	}
