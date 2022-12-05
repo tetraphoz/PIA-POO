@@ -33,7 +33,7 @@ public class VideoManager {
 
     public boolean crearVideo(Video v) {
         try {
-            stmnt = conn.prepareStatement("INSERT INTO video (name, artist, videoPath, imagePath, favorito) VALUES (?,?,?,?, false)");
+            stmnt = conn.prepareStatement("INSERT INTO video (name, artist, videoPath, imagePath) VALUES (?,?,?,?)");
             stmnt.setString(1, v.getName());
             stmnt.setString(2, v.getArtist());
             stmnt.setString(3, v.getVideoPath().toAbsolutePath().toString());
@@ -60,25 +60,13 @@ public class VideoManager {
 
     public boolean actualizarVideo(Video v) {
         try {
-            stmnt = conn.prepareStatement("UPDATE video SET name = ?, artist = ?, videoPath = ?, imagePath = ? WHERE (idvideo = ?)");
+            stmnt = conn.prepareStatement("UPDATE video SET name = ?, artist = ?, videoPath = ?, imagePath = ?, favorito = ? WHERE (idvideo = ?)");
             stmnt.setString(1, v.getName());
             stmnt.setString(2, v.getArtist());
             stmnt.setString(3, v.getVideoPath().toAbsolutePath().toString());
             stmnt.setString(4, v.getImagePath().toAbsolutePath().toString());
-            stmnt.setInt(   5, v.getIdVideo());
-            stmnt.executeUpdate();
-            return true;
-        } catch (SQLException | NullPointerException ex) {
-            Logger.getLogger(UsuarioManager.class.getName()).log(Level.SEVERE, null, ex);
-            return false;
-        }
-    }
-
-    public boolean actualizarFavorito(Video v, boolean favorito) {
-        try {
-            stmnt = conn.prepareStatement("UPDATE video SET favorito = ? WHERE (idvideo = ?)");
-            stmnt.setBoolean(1, favorito);
-            stmnt.setInt(    2, v.getIdVideo());
+            stmnt.setBoolean(5, v.getIsFavorite());
+            stmnt.setInt(   6, v.getIdVideo());
             stmnt.executeUpdate();
             return true;
         } catch (SQLException | NullPointerException ex) {
@@ -124,7 +112,8 @@ public class VideoManager {
                               rs.getString("name"),
                               rs.getString("artist"),
                               Paths.get(rs.getString("videoPath")),
-                              Paths.get(rs.getString("imagePath")));
+                              Paths.get(rs.getString("imagePath")),
+                              rs.getBoolean("favorito"));
                 lista.add(v);
             }
             return lista;
@@ -146,7 +135,8 @@ public class VideoManager {
                               rs.getString("name"),
                               rs.getString("artist"),
                               Paths.get(rs.getString("videoPath")),
-                              Paths.get(rs.getString("imagePath")));
+                              Paths.get(rs.getString("imagePath")),
+                              rs.getBoolean("favorito"));
                 tm.addRow(v.getObjectArray());
                 cbxIDVideo.addItem(rs.getInt("idvideo"));
             }
@@ -169,7 +159,8 @@ public class VideoManager {
                                     rs.getString("name"),
                                     rs.getString("artist"),
                                     Paths.get(rs.getString("videoPath")),
-                                    Paths.get(rs.getString("imagePath")));
+                                    Paths.get(rs.getString("imagePath")),
+                                    rs.getBoolean("favorito"));
             }
         } catch (SQLException | NullPointerException ex) {
             Logger.getLogger(UsuarioManager.class.getName()).log(Level.SEVERE, null, ex);

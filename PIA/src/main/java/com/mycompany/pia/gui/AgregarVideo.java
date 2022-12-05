@@ -238,7 +238,7 @@ public class AgregarVideo extends javax.swing.JFrame {
     private void btnAgergarVideoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgergarVideoActionPerformed
         String name = txtNombre.getText();
         String artist = txtArtista.getText();
-        Video v = new Video(0, name, artist, videoPath, imagePath);
+        Video v = new Video(0, name, artist, videoPath, imagePath, false);
         VideoManager vm = new VideoManager();
         if(vm.crearVideo(v)) {    
             JOptionPane.showMessageDialog(rootPane,

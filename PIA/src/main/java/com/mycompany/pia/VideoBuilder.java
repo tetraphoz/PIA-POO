@@ -8,6 +8,7 @@ public class VideoBuilder {
     private String artist;
     private Path videoPath;
     private Path imagePath;
+    private boolean isFavorite;
 
     public VideoBuilder setIdVideo(int idVideo) {
         this.idVideo = idVideo;
@@ -33,8 +34,13 @@ public class VideoBuilder {
         this.imagePath = imagePath;
         return this;
     }
+    
+    public VideoBuilder setIsFavorite(boolean isFavorite) {
+        this.isFavorite = isFavorite;
+        return this;
+    }
 
     public Video build() {
-        return new Video(idVideo, name, artist, videoPath, imagePath);
+        return new Video(idVideo, name, artist, videoPath, imagePath, isFavorite);
     }
 }

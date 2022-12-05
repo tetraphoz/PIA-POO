@@ -17,7 +17,7 @@ public class EditarVideo extends javax.swing.JFrame {
     private final ImageIcon iconCheck48 = new ImageIcon(new ImageIcon(
         getClass().getResource("/ok_icon_48px.png")).getImage());
     
-    String[] columnas = {"ID", "Nombre", "Artista", "Ubicación vídeo", "Ubicación imagen"};
+    String[] columnas = {"ID", "Nombre", "Artista", "Ubicación vídeo", "Ubicación imagen", "Favorito"};
     DefaultTableModel tm = new DefaultTableModel(columnas, 0);
     VideoManager vm = new VideoManager();
     
@@ -328,7 +328,7 @@ public class EditarVideo extends javax.swing.JFrame {
         int id = Integer.parseInt(cbxIDVideo.getSelectedItem().toString());
         String name = txtNombre.getText();
         String artist = txtArtista.getText();
-        Video v = new Video(id, name, artist, videoPath, imagePath);
+        Video v = new Video(id, name, artist, videoPath, imagePath, false);
 
         if(vm.actualizarVideo(v)) {    
             JOptionPane.showMessageDialog(rootPane,
@@ -347,7 +347,7 @@ public class EditarVideo extends javax.swing.JFrame {
         int id = Integer.parseInt(cbxIDVideo.getSelectedItem().toString());
         String name = txtNombre.getText();
         String artist = txtArtista.getText();
-        Video v = new Video(id, name, artist, videoPath, imagePath);
+        Video v = new Video(id, name, artist, videoPath, imagePath, false);
 
         if(vm.eliminarVideo(id)) {    
             JOptionPane.showMessageDialog(rootPane,

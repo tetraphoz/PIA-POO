@@ -8,23 +8,24 @@ public class Video {
 	private String artist;
 	private Path videoPath;
 	private Path imagePath;
-	private boolean favorito;
+        private boolean isFavorite;
 
-	public Video(int idVideo, String name, String artist, Path videoPath, Path imagePath) {
+	public Video(int idVideo, String name, String artist, Path videoPath, Path imagePath, boolean isFavorite) {
 		this.idVideo = idVideo;
 		this.name = name;
 		this.artist = artist;
 		this.videoPath = videoPath;
 		this.imagePath = imagePath;
+                this.isFavorite = isFavorite;
 	}
-
-	public boolean getFavorito(){
-		return favorito;
-	}
-
-	public void setFavorito(boolean favorito){
-		this.favorito = favorito;
-	}
+        
+        public boolean getIsFavorite() {
+            return isFavorite;
+        }
+        
+        public void setIsFavorite(boolean isFavorite) {
+            this.isFavorite = isFavorite;
+        }
 
 	public int getIdVideo() {
 		return idVideo;

@@ -12,16 +12,17 @@ import javax.swing.JPanel;
 import com.mycompany.pia.Video;
 import com.mycompany.pia.VideoLabel;
 import com.mycompany.pia.db.VideoManager;
-import javax.swing.JOptionPane;
+import javax.swing.JButton;
 
 import uk.co.caprica.vlcj.player.component.EmbeddedMediaPlayerComponent;
 
 public class Reproductor extends javax.swing.JFrame {
-
+    private final ImageIcon iconFav = new ImageIcon(new ImageIcon(
+            getClass().getResource("/heart_icon_fav.png")).getImage());
+    private final ImageIcon iconNofav = new ImageIcon(new ImageIcon(
+            getClass().getResource("/heart_icon_nofav.png")).getImage());
+    
     private final EmbeddedMediaPlayerComponent mediaPlayerComponent;
-
-    private final ImageIcon iconError48 = new ImageIcon(new ImageIcon(
-            getClass().getResource("/error_icon_48px.png")).getImage());
 
     public Reproductor() {
         initComponents();
@@ -33,71 +34,99 @@ public class Reproductor extends javax.swing.JFrame {
     }
 
     public void initPanels() {
-
-        var vm = new VideoManager();
-	List<Video> catalogo = vm.cargarVideos();
-	if(catalogo.size() == 0){
-		JOptionPane.showMessageDialog(rootPane,
-			"El catalogo esta vacio.",
-			"Intentalo de nuevo.",
-			0,
-			iconError48);
-	}
-
-        java.awt.GridLayout songsPanelLayout = new java.awt.GridLayout(catalogo.size(), 1);
-        songsPanel.setLayout(songsPanelLayout);
-
-        for (Video v : catalogo) {
-            JPanel songPanel1 = new JPanel();
-            VideoLabel lblSongImage = new VideoLabel();
-            JLabel lblSongName = new JLabel();
-            JLabel lblSongArtist = new JLabel();
-            
-            songPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-            lblSongImage.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-            lblSongName.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-            lblSongArtist.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-            
-            javax.swing.GroupLayout songPanel1Layout = new javax.swing.GroupLayout(songPanel1);
-            songPanel1.setLayout(songPanel1Layout);
-            
-            songPanel1Layout.setHorizontalGroup(
-                    songPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(songPanel1Layout.createSequentialGroup()
-                                    .addContainerGap()
-                                    .addComponent(lblSongImage, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addGroup(songPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(lblSongName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                            .addComponent(lblSongArtist, javax.swing.GroupLayout.DEFAULT_SIZE, 274, Short.MAX_VALUE))
-                                    .addContainerGap())
-            );
-            
-            songPanel1Layout.setVerticalGroup(
-                    songPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(songPanel1Layout.createSequentialGroup()
-                                    .addContainerGap()
-                                    .addGroup(songPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addGroup(songPanel1Layout.createSequentialGroup()
-                                                    .addGap(6, 6, 6)
-                                                    .addComponent(lblSongName, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                    .addComponent(lblSongArtist, javax.swing.GroupLayout.DEFAULT_SIZE, 22, Short.MAX_VALUE))
-                                            .addComponent(lblSongImage, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                    .addContainerGap())
-            );
-            initImages(lblSongImage, v.getImagePath(), v.getVideoPath(), 70, 60);
-            lblSongImage.addMouseListener(new java.awt.event.MouseAdapter() {
-                public void mouseClicked(java.awt.event.MouseEvent evt) {
-                    lblImagenMouseClicked(evt, v.getVideoPath().toAbsolutePath().toString());
-                }
-            });
-            
-            lblSongName.setText(v.getName());
-            lblSongArtist.setText(v.getArtist());
-            songsPanel.add(songPanel1);
-        }
+        VideoManager vm = new VideoManager();
+        List<Video> catalogo = vm.cargarVideos();
+        boolean favoritesAreLoaded = false;
         
+        java.awt.GridLayout songsPanelLayout = new java.awt.GridLayout(20, 2);
+        songsPanel.setLayout(songsPanelLayout);
+        for(int i = 0; i < 2; i++) {
+            for(Video v : catalogo) {
+                JPanel songPanel1 = new JPanel();
+                VideoLabel lblSongImage = new VideoLabel();
+                JLabel lblSongName = new JLabel();
+                JLabel lblSongArtist = new JLabel();
+                JButton btnFavorite = new JButton();
+                
+                if(favoritesAreLoaded && v.getIsFavorite())
+                    continue;
+                else if(!favoritesAreLoaded && !v.getIsFavorite())
+                    continue;
+                
+                songPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+                lblSongImage.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+                lblSongName.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+                lblSongArtist.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+
+                javax.swing.GroupLayout songPanel1Layout = new javax.swing.GroupLayout(songPanel1);
+                songPanel1.setLayout(songPanel1Layout);
+
+                songPanel1Layout.setHorizontalGroup(
+                        songPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(songPanel1Layout.createSequentialGroup()
+                                        .addContainerGap()
+                                        .addComponent(lblSongImage, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addGroup(songPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                .addComponent(lblSongName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                .addComponent(lblSongArtist, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE))
+                                                .addComponent(btnFavorite, javax.swing.GroupLayout.DEFAULT_SIZE, 60, Short.MAX_VALUE)
+                                        .addContainerGap())
+                );
+
+                songPanel1Layout.setVerticalGroup(
+                        songPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(songPanel1Layout.createSequentialGroup()
+                                        .addContainerGap()
+                                        .addGroup(songPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                .addGroup(songPanel1Layout.createSequentialGroup()
+                                                        .addGap(6, 6, 6)
+                                                        .addComponent(lblSongName, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                        .addComponent(lblSongArtist, javax.swing.GroupLayout.DEFAULT_SIZE, 22, Short.MAX_VALUE))
+                                                        .addComponent(btnFavorite, javax.swing.GroupLayout.DEFAULT_SIZE, 10, Short.MAX_VALUE)
+                                                .addComponent(lblSongImage, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                        .addContainerGap())
+                );
+                initImages(lblSongImage, v.getImagePath(), v.getVideoPath(), 70, 60);
+
+                lblSongImage.addMouseListener(new java.awt.event.MouseAdapter() {
+                    public void mouseClicked(java.awt.event.MouseEvent evt) {
+                        lblImagenMouseClicked(evt, v.getVideoPath().toAbsolutePath().toString());
+                    }
+                });
+
+                btnFavorite.addMouseListener(new java.awt.event.MouseAdapter() {
+                   public void mouseClicked(java.awt.event.MouseEvent evt) {
+                       if(btnFavorite.getIcon().equals(iconNofav)) {
+                           btnFavorite.setIcon(iconFav);
+                           v.setIsFavorite(true);
+                           vm.actualizarVideo(v);
+                       }
+                       else {
+                           btnFavorite.setIcon(iconNofav);
+                           v.setIsFavorite(false);
+                           vm.actualizarVideo(v);
+                       }
+                   }
+                });
+
+                lblSongName.setText(v.getName());
+                lblSongArtist.setText(v.getArtist());
+                
+                if(v.getIsFavorite())
+                    btnFavorite.setIcon(iconFav);
+                else
+                    btnFavorite.setIcon(iconNofav);
+                
+                btnFavorite.setOpaque(false);
+                btnFavorite.setContentAreaFilled(false);
+                btnFavorite.setBorderPainted(false);
+
+                songsPanel.add(songPanel1);
+            }
+            favoritesAreLoaded = true;
+        }
     }
 
     private void lblImagenMouseClicked(java.awt.event.MouseEvent evt, String urlVideo) {
