@@ -12,13 +12,15 @@ public class Registro extends javax.swing.JFrame {
             getClass().getResource("/error_icon.png")).getImage());
     private final ImageIcon iconCheck = new ImageIcon(new ImageIcon(
         getClass().getResource("/ok_icon.png")).getImage());
-
+    private final ImageIcon iconError48 = new ImageIcon(new ImageIcon(
+            getClass().getResource("/error_icon_48px.png")).getImage());
+    private final ImageIcon iconCheck48 = new ImageIcon(new ImageIcon(
+        getClass().getResource("/ok_icon_48px.png")).getImage());
+    
     private Timer timerEmail = null;
     private Timer timerUser = null;
     private Timer timerPassword = null;
-
-	UsuarioManager um = new UsuarioManager();
-
+    
     public Registro() {
         initComponents();
     }
@@ -182,16 +184,17 @@ public class Registro extends javax.swing.JFrame {
         String email = txtEmail.getText();
         String username = txtUser.getText();
         String password = new String(txtPassword.getPassword());
-        String error = "";
+        String msgError = "";
         boolean valido = true;
         
         Usuario user = new Usuario(email, username, password);
+        UsuarioManager um = new UsuarioManager();
         
         if(user.validarEmail())
             iconEmail.setIcon(iconCheck);
         else {
             valido = false;
-            error += "Correo electrónico inválido.\n";
+            msgError += "Correo electrónico inválido.\n";
             iconEmail.setIcon(iconError);
         }          
         
@@ -199,7 +202,7 @@ public class Registro extends javax.swing.JFrame {
             iconUser.setIcon(iconCheck);
         else {
             valido = false;
-            error += "Nombre de usuario inválido.\n";
+            msgError += "Nombre de usuario inválido.\n";
             iconUser.setIcon(iconError);
         }          
         
@@ -207,21 +210,36 @@ public class Registro extends javax.swing.JFrame {
             iconPassword.setIcon(iconCheck);
         else {
             valido = false;
-            error += "Contraseña inválida.\n";
+            msgError += "Contraseña inválida.\n";
             iconPassword.setIcon(iconError);
         }
-
-        if(valido){
-            System.out.println("");
-            um.crearUsuario(user);
-            JOptionPane.showMessageDialog(rootPane, "Usuario registrado exitosamente", "Mensaje", 1);
-            this.dispose();
-            new Login().setVisible(true);
+        
+        if(valido) {
+            if(um.checkUserExistance(user)) {
+                iconEmail.setIcon(iconError);
+                JOptionPane.showMessageDialog(rootPane,
+                        "El usuario ya existe.",
+                        "Datos de registro inválidos",
+                        0,
+                        iconError48);
+            } else {
+                um.crearUsuario(user);
+                JOptionPane.showMessageDialog(rootPane,
+                        "Registro exitoso. Bienvenido " + user.getUsername() + ".",
+                        "Datos de registro válidos",
+                        1,
+                        iconCheck48);
+                this.dispose();
+                new Menu().setVisible(true);
+            }
         } else {
-            error += "\nPase el cursor sobre los íconos de error para más detalles.";
-            JOptionPane.showMessageDialog(rootPane, error, "Datos de registro inválidos", 0);
+            msgError += "\nPase el cursor sobre los íconos de error para más detalles.";
+            JOptionPane.showMessageDialog(rootPane,
+                    msgError,
+                    "Datos de registro inválidos",
+                    0,
+                    iconError48);
         }
-
     }//GEN-LAST:event_btnRegistroActionPerformed
 
     private void iconUserMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_iconUserMouseEntered

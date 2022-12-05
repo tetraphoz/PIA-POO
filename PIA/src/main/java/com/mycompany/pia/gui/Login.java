@@ -2,11 +2,15 @@ package com.mycompany.pia.gui;
 
 import com.mycompany.pia.Usuario;
 import com.mycompany.pia.db.UsuarioManager;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
 public class Login extends javax.swing.JFrame {
-	UsuarioManager um = new UsuarioManager();
-
+    private final ImageIcon iconError48 = new ImageIcon(new ImageIcon(
+            getClass().getResource("/error_icon_48px.png")).getImage());
+    private final ImageIcon iconCheck48 = new ImageIcon(new ImageIcon(
+        getClass().getResource("/ok_icon_48px.png")).getImage());
+    
     public Login() {
         initComponents();
     }
@@ -117,15 +121,23 @@ public class Login extends javax.swing.JFrame {
         String email = txtEmail.getText();
         String password = new String(txtPassword.getPassword()); 
         Usuario user = new Usuario(email, password); 
-       
-        if(user.validarEmail() && um.UsuarioValido(email, password)){
-            System.out.println("login");
+        UsuarioManager um = new UsuarioManager();
+        
+        if(um.usuarioValido(user)) {
+            JOptionPane.showMessageDialog(rootPane,
+                    "Bienvenido de nuevo " + user.getUsername() + ".",
+                    "Datos de login válidos", 1,
+                    iconCheck48);
             this.dispose();
-            new Inicio().setVisible(true);
+            new Menu().setVisible(true);
         }
-        else
-            JOptionPane.showMessageDialog(rootPane, "Usuario y/o contraseña inválidos.", "Datos de login inválidos", 0);
-
+        else {
+            JOptionPane.showMessageDialog(rootPane,
+                    "Usuario y/o contraseña inválidos.",
+                    "Datos de login inválidos",
+                    0,
+                    iconError48);            
+        }
     }//GEN-LAST:event_btnLoginActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

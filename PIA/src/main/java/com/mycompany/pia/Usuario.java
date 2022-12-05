@@ -30,28 +30,26 @@ public class Usuario {
         return password;
     }
     
+    public void setUsername(String username) {
+        this.username = username;
+    }
+    
     /* MÉTODOS DE VALIDACIÓN */
     /* Expresión regex construida con https://regexr.com/73r3b */
     public boolean validarEmail() {
         String emailRegex = "(?=.{10,30}$)[a-zA-Z0-9_\\.]{3,}?@[a-zA-Z0-9]{3,}?\\.[a-zA-Z]{2,3}";
-        if(!email.toLowerCase().matches(emailRegex))
-            System.out.println("Email invalido");
         return email.toLowerCase().matches(emailRegex);
     }
     
     /* Expresión regex construida con https://regexr.com/73r81 */
     public boolean validarUsername() {
         String usernameRegex = "(?=.{5,45}$)[a-zA-Z0-9_]{5,}?";
-        if(!username.matches(usernameRegex))
-            System.out.println("User invalido");
         return username.matches(usernameRegex);
     }
     
     /* Expresión regex construida con https://regexr.com/73r8v */
     public boolean validarPassword() {
         String passwordRegex = "^(?=.*[0-9])(?=.*[A-Z])(?=.*[a-z])(?=.*[$%&#.\\-=:;,]).{8,16}$";
-        if(!password.matches(passwordRegex))
-            System.out.println("Password invalido");
         return password.matches(passwordRegex);
     }
 }
