@@ -7,6 +7,13 @@ public class Video {
 	private String artist;
 	private Path videoPath;
 	private Path imagePath;
+
+	public Video(String name, String artist, Path videoPath, Path imagePath){
+		this.name = name;
+		this.artist = artist;
+		this.videoPath = videoPath;
+		this.imagePath = imagePath;
+	}
 	
 	public String getName() {
 		return name;
