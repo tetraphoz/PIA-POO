@@ -6,6 +6,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -89,6 +91,25 @@ public class VideoManager {
             Logger.getLogger(UsuarioManager.class.getName()).log(Level.SEVERE, null, ex);
         }
 
+        return null;
+    }
+
+    public List<Video> cargarVideos(){
+        VideoBuilder vb = new VideoBuilder();
+        var lista = new ArrayList<Video>();
+        try {
+            stmnt = conn.prepareStatement("SELECT * FROM video");
+            rs = stmnt.executeQuery();
+
+            while(rs.next()){
+                vb.setIdVideo(rs.getInt("idvideo")).setName(rs.getString("name")).setArtist(rs.getString("artist"))
+                        .setVideoPath(Paths.get(rs.getString("videoPath")))
+                        .setImagePath(Paths.get(rs.getString("imagePath")));
+                lista.add(vb.build());
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(VideoManager.class.getName()).log(Level.SEVERE, null, ex);
+        }
         return null;
     }
     

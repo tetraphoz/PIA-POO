@@ -30,7 +30,7 @@ public class Reproductor extends javax.swing.JFrame {
     public void initPanels() {
 
         var vm = new VideoManager();
-        List<Video> catalogo = vm.leerCatalogo();
+        List<Video> catalogo = vm.cargarVideos();
 
         java.awt.GridLayout songsPanelLayout = new java.awt.GridLayout(catalogo.size(), 1);
         songsPanel.setLayout(songsPanelLayout);
