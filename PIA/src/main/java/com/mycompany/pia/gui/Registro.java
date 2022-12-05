@@ -1,6 +1,7 @@
 package com.mycompany.pia.gui;
 
 import com.mycompany.pia.Usuario;
+import com.mycompany.pia.db.UsuarioManager;
 import java.util.Timer;
 import java.util.TimerTask;
 import javax.swing.ImageIcon;
@@ -11,11 +12,13 @@ public class Registro extends javax.swing.JFrame {
             getClass().getResource("/error_icon.png")).getImage());
     private final ImageIcon iconCheck = new ImageIcon(new ImageIcon(
         getClass().getResource("/ok_icon.png")).getImage());
-    
+
     private Timer timerEmail = null;
     private Timer timerUser = null;
     private Timer timerPassword = null;
-    
+
+	UsuarioManager um = new UsuarioManager();
+
     public Registro() {
         initComponents();
     }
@@ -207,13 +210,18 @@ public class Registro extends javax.swing.JFrame {
             error += "Contraseña inválida.\n";
             iconPassword.setIcon(iconError);
         }
-        
-        if(valido)
+
+        if(valido){
             System.out.println("");
-        else {
+            um.crearUsuario(user);
+            JOptionPane.showMessageDialog(rootPane, "Usuario registrado exitosamente", "Mensaje", 1);
+            this.dispose();
+            new Login().setVisible(true);
+        } else {
             error += "\nPase el cursor sobre los íconos de error para más detalles.";
             JOptionPane.showMessageDialog(rootPane, error, "Datos de registro inválidos", 0);
         }
+
     }//GEN-LAST:event_btnRegistroActionPerformed
 
     private void iconUserMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_iconUserMouseEntered

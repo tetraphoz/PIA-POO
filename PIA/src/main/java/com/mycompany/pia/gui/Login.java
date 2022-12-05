@@ -1,9 +1,11 @@
 package com.mycompany.pia.gui;
 
 import com.mycompany.pia.Usuario;
+import com.mycompany.pia.db.UsuarioManager;
 import javax.swing.JOptionPane;
 
 public class Login extends javax.swing.JFrame {
+	UsuarioManager um = new UsuarioManager();
 
     public Login() {
         initComponents();
@@ -116,10 +118,14 @@ public class Login extends javax.swing.JFrame {
         String password = new String(txtPassword.getPassword()); 
         Usuario user = new Usuario(email, password); 
        
-        if(user.validarEmail())
+        if(user.validarEmail() && um.UsuarioValido(email, password)){
             System.out.println("login");
+            this.dispose();
+            new Inicio().setVisible(true);
+        }
         else
             JOptionPane.showMessageDialog(rootPane, "Usuario y/o contraseña inválidos.", "Datos de login inválidos", 0);
+
     }//GEN-LAST:event_btnLoginActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
