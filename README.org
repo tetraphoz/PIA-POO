@@ -1,13 +1,15 @@
-#+title: Reproductor de videos
+#+title: Leer antes de correr
 
-* Leer antes de correr
-Antes de poder correr el proyecto, es necesario tener la siguiente base de datos
+Antes de poder correr el proyecto, es necesario cumplir con los siguientes requisitos
+* Crear una base de datos
 #+begin_src sql
 create database pia;
 use pia;
 CREATE TABLE user  (iduser INT AUTO_INCREMENT PRIMARY KEY, username VARCHAR(45) NOT NULL, password VARCHAR(16) NOT NULL);
 CREATE TABLE video (iduser INT AUTO_INCREMENT PRIMARY KEY, username VARCHAR(45) NOT NULL, password VARCHAR(16) NOT NULL);
 #+end_src
-
+* Modificar los valores default de la configuración
 El código no tiene un nombre de usuario o contraseña default para la base de datos.
-Por favor modifique el archivo Database.java con la información adecuada.
+Por favor modifique el archivo [[file:PIA/src/main/resources/config.properties]] con la informacion adequada.
+
+Solo debería ser necesario cambiar el nombre de usuario y contraseña si usaron las instrucciones para crear la base de datos.
