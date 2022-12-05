@@ -32,7 +32,7 @@ public class VideoManager {
 
     public void crearVideo(Video v) {
         try {
-            stmnt = conn.prepareStatement("INSERT INTO user (name, artist, videoPath, imagePath) VALUES (?,?,?,?)");
+            stmnt = conn.prepareStatement("INSERT INTO video (name, artist, videoPath, imagePath) VALUES (?,?,?,?)");
             stmnt.setString(1, v.getName());
             stmnt.setString(2, v.getArtist());
             stmnt.setString(3, v.getVideoPath().toAbsolutePath().toString());
@@ -55,7 +55,7 @@ public class VideoManager {
 
     public void actualizarVideo(Video v) {
         try {
-            stmnt = conn.prepareStatement("UPDATE user SET name = ?, artist = ?, videoPath = ?, imagePath = ? WHERE idvideo = ?");
+            stmnt = conn.prepareStatement("UPDATE video SET name = ?, artist = ?, videoPath = ?, imagePath = ? WHERE idvideo = ?");
             stmnt.setString(1, v.getName());
             stmnt.setString(2, v.getArtist());
             stmnt.setString(3, v.getVideoPath().toAbsolutePath().toString());
