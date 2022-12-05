@@ -13,7 +13,7 @@ public class Inicio extends javax.swing.JFrame {
 		initComponents();
 		Clima c = new Clima();
 		c.obtenerClima();
-		lblHora.setText("Clima Actual: "+ c.tempMaxima + " C°");
+		lblClima.setText("Clima Actual: "+ c.tempMaxima + " C°");
 		Timer t = new Timer(1000, updateClockAction);
 		t.start();
 	}
