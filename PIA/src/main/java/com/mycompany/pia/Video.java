@@ -9,7 +9,7 @@ public class Video {
 	private Path videoPath;
 	private Path imagePath;
 
-	public Video(int idVideo, String name, String artist, Path videoPath, Path imagePath){
+	public Video(int idVideo, String name, String artist, Path videoPath, Path imagePath) {
 		this.idVideo = idVideo;
 		this.name = name;
 		this.artist = artist;
@@ -56,4 +56,15 @@ public class Video {
 	public void setImagePath(Path imagePath) {
 		this.imagePath = imagePath;
 	}
+        
+        public Object[] getObjectArray() {
+            Object[] oo = {
+                idVideo,
+                name,
+                artist,
+                videoPath.toAbsolutePath().toString(),
+                imagePath.toAbsolutePath().toString()
+            };
+            return oo;
+        }
 }

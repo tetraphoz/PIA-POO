@@ -50,6 +50,7 @@ public class AgregarVideo extends javax.swing.JFrame {
         tabVideos = new javax.swing.JMenu();
         tabReproductor = new javax.swing.JMenuItem();
         tabLogout = new javax.swing.JMenu();
+        tabHome = new javax.swing.JMenuItem();
         tabSalir = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -130,6 +131,15 @@ public class AgregarVideo extends javax.swing.JFrame {
                 tabLogoutActionPerformed(evt);
             }
         });
+
+        tabHome.setIcon(new javax.swing.ImageIcon(getClass().getResource("/home_icon.png"))); // NOI18N
+        tabHome.setText("Menú de inicio");
+        tabHome.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tabHomeActionPerformed(evt);
+            }
+        });
+        tabLogout.add(tabHome);
 
         tabSalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/logout_icon.png"))); // NOI18N
         tabSalir.setText("Salir");
@@ -248,6 +258,11 @@ public class AgregarVideo extends javax.swing.JFrame {
         new EditarVideo().setVisible(true);
     }//GEN-LAST:event_tabEditarVideoActionPerformed
 
+    private void tabHomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tabHomeActionPerformed
+        this.dispose();
+        new Inicio().setVisible(true);
+    }//GEN-LAST:event_tabHomeActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAgergarVideo;
     private javax.swing.JButton btnArchivoImagen;
@@ -263,6 +278,7 @@ public class AgregarVideo extends javax.swing.JFrame {
     private javax.swing.JMenuItem tabAgregarVideo;
     private javax.swing.JMenu tabCatalogo;
     private javax.swing.JMenuItem tabEditarVideo;
+    private javax.swing.JMenuItem tabHome;
     private javax.swing.JMenu tabLogout;
     private javax.swing.JMenuItem tabReproductor;
     private javax.swing.JMenuItem tabSalir;

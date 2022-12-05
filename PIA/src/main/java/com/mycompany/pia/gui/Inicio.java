@@ -57,6 +57,7 @@ public class Inicio extends javax.swing.JFrame {
         tabVideos = new javax.swing.JMenu();
         tabReproductor = new javax.swing.JMenuItem();
         tabLogout = new javax.swing.JMenu();
+        tabHome = new javax.swing.JMenuItem();
         tabSalir = new javax.swing.JMenuItem();
 
         jMenu1.setText("File");
@@ -148,6 +149,10 @@ public class Inicio extends javax.swing.JFrame {
             }
         });
 
+        tabHome.setIcon(new javax.swing.ImageIcon(getClass().getResource("/home_icon.png"))); // NOI18N
+        tabHome.setText("Menú de inicio");
+        tabLogout.add(tabHome);
+
         tabSalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/logout_icon.png"))); // NOI18N
         tabSalir.setText("Salir");
         tabSalir.addActionListener(new java.awt.event.ActionListener() {
@@ -232,6 +237,7 @@ public class Inicio extends javax.swing.JFrame {
     private javax.swing.JMenuItem tabAgregarVideo;
     private javax.swing.JMenu tabCatalogo;
     private javax.swing.JMenuItem tabEditarVideo;
+    private javax.swing.JMenuItem tabHome;
     private javax.swing.JMenu tabLogout;
     private javax.swing.JMenuItem tabReproductor;
     private javax.swing.JMenuItem tabSalir;

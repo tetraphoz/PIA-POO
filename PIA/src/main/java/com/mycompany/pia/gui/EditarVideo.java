@@ -41,6 +41,7 @@ public class EditarVideo extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jMenuItem1 = new javax.swing.JMenuItem();
         lblTitulo = new javax.swing.JLabel();
         lbl_ID = new javax.swing.JLabel();
         lblNombre = new javax.swing.JLabel();
@@ -63,7 +64,10 @@ public class EditarVideo extends javax.swing.JFrame {
         jMenu2 = new javax.swing.JMenu();
         tabReproductor = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
+        tabHome = new javax.swing.JMenuItem();
         tabSalir = new javax.swing.JMenuItem();
+
+        jMenuItem1.setText("jMenuItem1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Visualizador de vídeos - Editar vídeo");
@@ -176,6 +180,15 @@ public class EditarVideo extends javax.swing.JFrame {
         jMenuBar1.add(jMenu2);
 
         jMenu3.setText("Cerrar sesión");
+
+        tabHome.setIcon(new javax.swing.ImageIcon(getClass().getResource("/home_icon.png"))); // NOI18N
+        tabHome.setText("Menú de inicio");
+        tabHome.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tabHomeActionPerformed(evt);
+            }
+        });
+        jMenu3.add(tabHome);
 
         tabSalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/logout_icon.png"))); // NOI18N
         tabSalir.setText("Salir");
@@ -348,6 +361,11 @@ public class EditarVideo extends javax.swing.JFrame {
         new EditarVideo().setVisible(true);
     }//GEN-LAST:event_btnEliminarActionPerformed
 
+    private void tabHomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tabHomeActionPerformed
+        this.dispose();
+        new Inicio().setVisible(true);
+    }//GEN-LAST:event_tabHomeActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnActualizar;
     private javax.swing.JButton btnEliminar;
@@ -358,6 +376,7 @@ public class EditarVideo extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblArtista;
     private javax.swing.JLabel lblNombre;
@@ -367,6 +386,7 @@ public class EditarVideo extends javax.swing.JFrame {
     private javax.swing.JLabel lbl_Imagen;
     private javax.swing.JMenuItem tabAgregarVideo;
     private javax.swing.JMenuItem tabEditarVideo;
+    private javax.swing.JMenuItem tabHome;
     private javax.swing.JMenuItem tabReproductor;
     private javax.swing.JMenuItem tabSalir;
     private javax.swing.JTable tblPrincipal;
