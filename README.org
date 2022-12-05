@@ -5,8 +5,8 @@ Antes de poder correr el proyecto, es necesario cumplir con los siguientes requi
 #+begin_src sql
 create database pia;
 use pia;
-CREATE TABLE user  (iduser INT AUTO_INCREMENT PRIMARY KEY, username VARCHAR(45) NOT NULL, password VARCHAR(16) NOT NULL);
-CREATE TABLE video (iduser INT AUTO_INCREMENT PRIMARY KEY, username VARCHAR(45) NOT NULL, password VARCHAR(16) NOT NULL);
+CREATE TABLE user  (iduser INT AUTO_INCREMENT PRIMARY KEY, email VARCHAR(30), username VARCHAR(45) NOT NULL, password VARCHAR(16) NOT NULL);
+CREATE TABLE video (idvideo INT AUTO_INCREMENT PRIMARY KEY, name VARCHAR(45) NOT NULL, artist VARCHAR(45) NOT NULL, videoPath VARCHAR(45) NOT NULL, imagePath VARCHAR(45) NOT NULL);
 #+end_src
 * Modificar los valores default de la configuración
 El código no tiene un nombre de usuario o contraseña default para la base de datos.
