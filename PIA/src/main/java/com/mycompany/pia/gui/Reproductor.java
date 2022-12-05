@@ -12,11 +12,16 @@ import javax.swing.JPanel;
 import com.mycompany.pia.Video;
 import com.mycompany.pia.VideoLabel;
 import com.mycompany.pia.db.VideoManager;
+import javax.swing.JOptionPane;
 
 import uk.co.caprica.vlcj.player.component.EmbeddedMediaPlayerComponent;
 
 public class Reproductor extends javax.swing.JFrame {
+
     private final EmbeddedMediaPlayerComponent mediaPlayerComponent;
+
+    private final ImageIcon iconError48 = new ImageIcon(new ImageIcon(
+            getClass().getResource("/error_icon_48px.png")).getImage());
 
     public Reproductor() {
         initComponents();
@@ -28,13 +33,21 @@ public class Reproductor extends javax.swing.JFrame {
     }
 
     public void initPanels() {
-        VideoManager vm = new VideoManager();
-        List<Video> catalogo = vm.cargarVideos();
-        
-        java.awt.GridLayout songsPanelLayout = new java.awt.GridLayout(20, 1);
+
+        var vm = new VideoManager();
+	List<Video> catalogo = vm.cargarVideos();
+	if(catalogo.size() == 0){
+		JOptionPane.showMessageDialog(rootPane,
+			"El catalogo esta vacio.",
+			"Intentalo de nuevo.",
+			0,
+			iconError48);
+	}
+
+        java.awt.GridLayout songsPanelLayout = new java.awt.GridLayout(catalogo.size(), 1);
         songsPanel.setLayout(songsPanelLayout);
-        
-        for(Video v : catalogo) {
+
+        for (Video v : catalogo) {
             JPanel songPanel1 = new JPanel();
             VideoLabel lblSongImage = new VideoLabel();
             JLabel lblSongName = new JLabel();
