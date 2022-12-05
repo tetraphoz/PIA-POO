@@ -108,7 +108,7 @@ public class Reproductor extends javax.swing.JFrame {
     }
 
     public void initImages(VideoLabel lbl, Path urlImage, Path urlVideo, int width, int height) {
-        lbl.setIcon(new ImageIcon(new ImageIcon(getClass().getResource(urlImage.toAbsolutePath().toString())).getImage()
+        lbl.setIcon(new ImageIcon(new ImageIcon(urlImage.toAbsolutePath().toString()).getImage()
                 .getScaledInstance(width, height, java.awt.Image.SCALE_SMOOTH)));
         lbl.setUrlVideo(urlVideo.toAbsolutePath().toString());
     }
