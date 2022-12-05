@@ -6,9 +6,9 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
 import org.json.JSONObject;
 
 public class Clima {
@@ -60,14 +60,14 @@ public class Clima {
 	}
 	
 	private void parse(String responseBody) {
-		JSONObject j = new JSONObject(responseBody);
-		this.tempMinima = j.getJSONArray("DailyForecasts")
+		obj = new JSONObject(responseBody);
+		this.tempMinima = obj.getJSONArray("DailyForecasts")
 			.getJSONObject(0)
 			.getJSONObject("Temperature")
 			.getJSONObject("Minimum")
 			.getFloat("Value");
 		
-		this.tempMaxima = j.getJSONArray("DailyForecasts")
+		this.tempMaxima = obj.getJSONArray("DailyForecasts")
 			.getJSONObject(0)
 			.getJSONObject("Temperature")
 			.getJSONObject("Maximum")
