@@ -34,17 +34,14 @@ public class Reproductor extends javax.swing.JFrame {
 
     public void initPanels() {
 
-
         var vm = new VideoManager();
-        List<Video> catalogo = vm.cargarVideos();
+	List<Video> catalogo = vm.cargarVideos();
 	if(catalogo.size() == 0){
-		this.dispose();
-		new Inicio().setVisible(true);
-            JOptionPane.showMessageDialog(rootPane,
-                    "El catalogo esta vacion",
-                    "Intentalo de nuevo",
-                    0,
-                    iconError48);            
+		JOptionPane.showMessageDialog(rootPane,
+			"El catalogo esta vacio.",
+			"Intentalo de nuevo.",
+			0,
+			iconError48);
 	}
 
         java.awt.GridLayout songsPanelLayout = new java.awt.GridLayout(catalogo.size(), 1);
