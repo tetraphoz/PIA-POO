@@ -24,3 +24,6 @@ hs_err_pid*
 /PIA/target/
 config.properties
 /PIA/nbproject/
+/PIA/.classpath
+/PIA/.project
+/PIA/.settings/
