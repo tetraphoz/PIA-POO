@@ -204,7 +204,8 @@ public class Inicio extends javax.swing.JFrame {
     }//GEN-LAST:event_tabSalirActionPerformed
 
     private void tabReproductorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tabReproductorActionPerformed
-        // TODO add your handling code here:
+        this.dispose();
+        new Reproductor().setVisible(true);
     }//GEN-LAST:event_tabReproductorActionPerformed
 
     private void tabEditarVideoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tabEditarVideoActionPerformed
