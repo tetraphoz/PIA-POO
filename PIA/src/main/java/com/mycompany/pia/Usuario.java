@@ -31,10 +31,6 @@ public class Usuario {
     }
     
     /* MÉTODOS DE VALIDACIÓN */
-    public boolean validarUsuario() {
-        return validarEmail() && validarUsername() && validarPassword();
-    }
-    
     /* Expresión regex construida con https://regexr.com/73r3b */
     public boolean validarEmail() {
         String emailRegex = "(?=.{10,30}$)[a-zA-Z0-9_\\.]{3,}?@[a-zA-Z0-9]{3,}?\\.[a-zA-Z]{2,3}";
