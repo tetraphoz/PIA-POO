@@ -1,20 +1,24 @@
 package com.mycompany.pia.gui;
 
-import com.mycompany.pia.VideoLabel;
 import java.awt.BorderLayout;
+import java.nio.file.Path;
+import java.util.List;
+
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+
+import com.mycompany.pia.Video;
+import com.mycompany.pia.VideoLabel;
+import com.mycompany.pia.db.VideoManager;
+
 import uk.co.caprica.vlcj.player.component.EmbeddedMediaPlayerComponent;
 
-public class VideoPlayerWindow extends javax.swing.JFrame {
-    private static int contador = 0;
+public class Reproductor extends javax.swing.JFrame {
     private final EmbeddedMediaPlayerComponent mediaPlayerComponent;
-    /**
-     * Creates new form MainWindow2
-     */
-    public VideoPlayerWindow() {
+
+    public Reproductor() {
         initComponents();
         mediaPlayerComponent = new EmbeddedMediaPlayerComponent();
         contentPane.setLayout(new BorderLayout());
@@ -24,11 +28,14 @@ public class VideoPlayerWindow extends javax.swing.JFrame {
     }
 
     public void initPanels() {
-        
-        java.awt.GridLayout songsPanelLayout = new java.awt.GridLayout(20, 1);
+
+        var vm = new VideoManager();
+        List<Video> catalogo = vm.leerCatalogo();
+
+        java.awt.GridLayout songsPanelLayout = new java.awt.GridLayout(catalogo.size(), 1);
         songsPanel.setLayout(songsPanelLayout);
 
-        for (int i = 0; i < 20; i++) {
+        for (Video v : catalogo) {
             JPanel songPanel1 = new JPanel();
             VideoLabel lblSongImage = new VideoLabel();
             JLabel lblSongName = new JLabel();
@@ -45,58 +52,50 @@ public class VideoPlayerWindow extends javax.swing.JFrame {
 
             javax.swing.GroupLayout songPanel1Layout = new javax.swing.GroupLayout(songPanel1);
             songPanel1.setLayout(songPanel1Layout);
-            songPanel1Layout.setHorizontalGroup(
-                    songPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(songPanel1Layout.createSequentialGroup()
-                                    .addContainerGap()
-                                    .addComponent(lblSongImage, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addGroup(songPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(lblSongName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                            .addComponent(lblSongArtist, javax.swing.GroupLayout.DEFAULT_SIZE, 274, Short.MAX_VALUE))
-                                    .addContainerGap())
-            );
-            songPanel1Layout.setVerticalGroup(
-                    songPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(songPanel1Layout.createSequentialGroup()
-                                    .addContainerGap()
-                                    .addGroup(songPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addGroup(songPanel1Layout.createSequentialGroup()
-                                                    .addGap(6, 6, 6)
-                                                    .addComponent(lblSongName, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                    .addComponent(lblSongArtist, javax.swing.GroupLayout.DEFAULT_SIZE, 22, Short.MAX_VALUE))
-                                            .addComponent(lblSongImage, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                    .addContainerGap())
-            );
-            initImages(lblSongImage, "/sample.jpg"
-                    , "C:\\Users\\Hernan\\Videos\\Captures\\sample_1280x720_surfing_with_audio.mpeg"
-                    , 70, 60);
+            songPanel1Layout.setHorizontalGroup(songPanel1Layout
+                    .createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(songPanel1Layout.createSequentialGroup().addContainerGap()
+                            .addComponent(lblSongImage, javax.swing.GroupLayout.PREFERRED_SIZE, 70,
+                                    javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addGroup(songPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lblSongName, javax.swing.GroupLayout.DEFAULT_SIZE,
+                                            javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(lblSongArtist, javax.swing.GroupLayout.DEFAULT_SIZE, 274,
+                                            Short.MAX_VALUE))
+                            .addContainerGap()));
+            songPanel1Layout.setVerticalGroup(songPanel1Layout
+                    .createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(songPanel1Layout.createSequentialGroup().addContainerGap().addGroup(songPanel1Layout
+                            .createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(songPanel1Layout.createSequentialGroup().addGap(6, 6, 6)
+                                    .addComponent(lblSongName, javax.swing.GroupLayout.PREFERRED_SIZE, 24,
+                                            javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED).addComponent(
+                                            lblSongArtist, javax.swing.GroupLayout.DEFAULT_SIZE, 22, Short.MAX_VALUE))
+                            .addComponent(lblSongImage, javax.swing.GroupLayout.DEFAULT_SIZE,
+                                    javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addContainerGap()));
+
+            initImages(lblSongImage, v.getImagePath(), v.getVideoPath(), 70, 60);
             lblSongImage.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                lblImagenMouseClicked(evt, "C:\\Users\\Hernan\\Videos\\Captures\\sample_1280x720_surfing_with_audio.mpeg");
-            }
-        });
+                public void mouseClicked(java.awt.event.MouseEvent evt) {
+                    lblImagenMouseClicked(evt, v.getVideoPath().toAbsolutePath().toString());
+                }
+            });
             songsPanel.add(songPanel1);
         }
-    } 
+    }
 
-    private void lblImagenMouseClicked(java.awt.event.MouseEvent evt, String urlVideo) {                                        
-        mediaPlayerComponent.mediaPlayer().media().startPaused(urlVideo); 
+    private void lblImagenMouseClicked(java.awt.event.MouseEvent evt, String urlVideo) {
+        mediaPlayerComponent.mediaPlayer().media().startPaused(urlVideo);
         mediaPlayerComponent.mediaPlayer().controls().play();
-    } 
-    
-    public void initImages(VideoLabel lbl, String urlImage, String urlVideo, int width, int height){
-        lbl.setIcon(new ImageIcon(
-                new ImageIcon(getClass().getResource(urlImage))
-                              .getImage()
-                              .getScaledInstance(width, 
-                                                 height,  
-                                                 java.awt.Image.SCALE_SMOOTH
-                              )
-                        )
-                    );
-        lbl.setUrlVideo(urlVideo);
+    }
+
+    public void initImages(VideoLabel lbl, Path urlImage, Path urlVideo, int width, int height) {
+        lbl.setIcon(new ImageIcon(new ImageIcon(getClass().getResource(urlImage.toAbsolutePath().toString())).getImage()
+                .getScaledInstance(width, height, java.awt.Image.SCALE_SMOOTH)));
+        lbl.setUrlVideo(urlVideo.toAbsolutePath().toString());
     }
 
     @SuppressWarnings("unchecked")
