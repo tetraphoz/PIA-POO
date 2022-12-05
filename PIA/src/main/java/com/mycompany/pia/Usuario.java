@@ -1,4 +1,4 @@
-package com.mycompany.pia_poo;
+package com.mycompany.pia;
 
 public class Usuario {
     private String email = "";

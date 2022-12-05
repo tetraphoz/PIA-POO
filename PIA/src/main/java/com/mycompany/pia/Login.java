@@ -1,4 +1,4 @@
-package com.mycompany.pia_poo;
+package com.mycompany.pia;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
