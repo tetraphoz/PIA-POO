@@ -55,7 +55,9 @@ public class Inicio extends javax.swing.JFrame {
         tabAgregarVideo = new javax.swing.JMenuItem();
         tabEditarVideo = new javax.swing.JMenuItem();
         tabVideos = new javax.swing.JMenu();
+        tabReproductor = new javax.swing.JMenuItem();
         tabLogout = new javax.swing.JMenu();
+        tabSalir = new javax.swing.JMenuItem();
 
         jMenu1.setText("File");
         jMenuBar2.add(jMenu1);
@@ -97,9 +99,11 @@ public class Inicio extends javax.swing.JFrame {
         setTitle("Visualizador de vídeos - Inicio");
 
         lblHora.setFont(new java.awt.Font("IBM Plex Mono", 0, 24)); // NOI18N
+        lblHora.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblHora.setText("Hora Actual: 00:00");
 
         lblClima.setFont(new java.awt.Font("IBM Plex Mono", 0, 14)); // NOI18N
+        lblClima.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         lblClima.setText("Clima Actual: 0°");
 
         tabCatalogo.setText("Catálogo");
@@ -115,11 +119,26 @@ public class Inicio extends javax.swing.JFrame {
 
         tabEditarVideo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/edit_icon.png"))); // NOI18N
         tabEditarVideo.setText("Editar información de vídeos");
+        tabEditarVideo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tabEditarVideoActionPerformed(evt);
+            }
+        });
         tabCatalogo.add(tabEditarVideo);
 
         jMenuBar1.add(tabCatalogo);
 
         tabVideos.setText("Vídeos");
+
+        tabReproductor.setIcon(new javax.swing.ImageIcon(getClass().getResource("/video_icon.png"))); // NOI18N
+        tabReproductor.setText("Reproductor de vídeos");
+        tabReproductor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tabReproductorActionPerformed(evt);
+            }
+        });
+        tabVideos.add(tabReproductor);
+
         jMenuBar1.add(tabVideos);
 
         tabLogout.setText("Cerrar sesión");
@@ -128,6 +147,16 @@ public class Inicio extends javax.swing.JFrame {
                 tabLogoutActionPerformed(evt);
             }
         });
+
+        tabSalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/logout_icon.png"))); // NOI18N
+        tabSalir.setText("Salir");
+        tabSalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tabSalirActionPerformed(evt);
+            }
+        });
+        tabLogout.add(tabSalir);
+
         jMenuBar1.add(tabLogout);
 
         setJMenuBar(jMenuBar1);
@@ -136,14 +165,10 @@ public class Inicio extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(337, Short.MAX_VALUE)
-                .addComponent(lblClima)
-                .addContainerGap())
+            .addComponent(lblHora, javax.swing.GroupLayout.DEFAULT_SIZE, 444, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
-                .addGap(122, 122, 122)
-                .addComponent(lblHora)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(lblClima, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -152,7 +177,7 @@ public class Inicio extends javax.swing.JFrame {
                 .addComponent(lblClima)
                 .addGap(69, 69, 69)
                 .addComponent(lblHora)
-                .addContainerGap(120, Short.MAX_VALUE))
+                .addContainerGap(119, Short.MAX_VALUE))
         );
 
         pack();
@@ -167,6 +192,20 @@ public class Inicio extends javax.swing.JFrame {
         this.dispose();
         new Menu().setVisible(true);
     }//GEN-LAST:event_tabLogoutActionPerformed
+
+    private void tabSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tabSalirActionPerformed
+        this.dispose();
+        new Menu().setVisible(true);
+    }//GEN-LAST:event_tabSalirActionPerformed
+
+    private void tabReproductorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tabReproductorActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tabReproductorActionPerformed
+
+    private void tabEditarVideoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tabEditarVideoActionPerformed
+        this.dispose();
+        new EditarVideo().setVisible(true);
+    }//GEN-LAST:event_tabEditarVideoActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenu jMenu1;
@@ -194,6 +233,8 @@ public class Inicio extends javax.swing.JFrame {
     private javax.swing.JMenu tabCatalogo;
     private javax.swing.JMenuItem tabEditarVideo;
     private javax.swing.JMenu tabLogout;
+    private javax.swing.JMenuItem tabReproductor;
+    private javax.swing.JMenuItem tabSalir;
     private javax.swing.JMenu tabVideos;
     // End of variables declaration//GEN-END:variables
 }

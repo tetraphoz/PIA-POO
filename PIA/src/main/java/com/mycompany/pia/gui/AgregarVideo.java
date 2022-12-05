@@ -48,10 +48,12 @@ public class AgregarVideo extends javax.swing.JFrame {
         tabAgregarVideo = new javax.swing.JMenuItem();
         tabEditarVideo = new javax.swing.JMenuItem();
         tabVideos = new javax.swing.JMenu();
+        tabReproductor = new javax.swing.JMenuItem();
         tabLogout = new javax.swing.JMenu();
+        tabSalir = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(475, 430));
+        setTitle("Visualizador de vídeos - Añadir vídeo");
 
         lblTitulo.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         lblTitulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -105,11 +107,21 @@ public class AgregarVideo extends javax.swing.JFrame {
 
         tabEditarVideo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/edit_icon.png"))); // NOI18N
         tabEditarVideo.setText("Editar información de vídeos");
+        tabEditarVideo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tabEditarVideoActionPerformed(evt);
+            }
+        });
         tabCatalogo.add(tabEditarVideo);
 
         jMenuBar1.add(tabCatalogo);
 
         tabVideos.setText("Vídeos");
+
+        tabReproductor.setIcon(new javax.swing.ImageIcon(getClass().getResource("/video_icon.png"))); // NOI18N
+        tabReproductor.setText("Reproductor de vídeos");
+        tabVideos.add(tabReproductor);
+
         jMenuBar1.add(tabVideos);
 
         tabLogout.setText("Cerrar sesión");
@@ -118,6 +130,16 @@ public class AgregarVideo extends javax.swing.JFrame {
                 tabLogoutActionPerformed(evt);
             }
         });
+
+        tabSalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/logout_icon.png"))); // NOI18N
+        tabSalir.setText("Salir");
+        tabSalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tabSalirActionPerformed(evt);
+            }
+        });
+        tabLogout.add(tabSalir);
+
         jMenuBar1.add(tabLogout);
 
         setJMenuBar(jMenuBar1);
@@ -131,22 +153,22 @@ public class AgregarVideo extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(48, 48, 48)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(lblNombre, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(lblArtista, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblNombre, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(lblArchivoVideo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(lblArchivoImagen))
+                            .addComponent(lblArchivoImagen, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(lblArtista, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(txtArtista)
                             .addComponent(txtNombre)
-                            .addComponent(btnArchivoVideo, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
+                            .addComponent(btnArchivoVideo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(btnArchivoImagen, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(165, 165, 165)
-                        .addComponent(btnAgergarVideo)))
-                .addContainerGap(65, Short.MAX_VALUE))
+                        .addComponent(btnAgergarVideo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(134, 134, 134)))
+                .addGap(65, 65, 65))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -216,6 +238,16 @@ public class AgregarVideo extends javax.swing.JFrame {
         new AgregarVideo().setVisible(true);
     }//GEN-LAST:event_btnAgergarVideoActionPerformed
 
+    private void tabSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tabSalirActionPerformed
+        this.dispose();
+        new Menu().setVisible(true);
+    }//GEN-LAST:event_tabSalirActionPerformed
+
+    private void tabEditarVideoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tabEditarVideoActionPerformed
+        this.dispose();
+        new EditarVideo().setVisible(true);
+    }//GEN-LAST:event_tabEditarVideoActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAgergarVideo;
     private javax.swing.JButton btnArchivoImagen;
@@ -232,6 +264,8 @@ public class AgregarVideo extends javax.swing.JFrame {
     private javax.swing.JMenu tabCatalogo;
     private javax.swing.JMenuItem tabEditarVideo;
     private javax.swing.JMenu tabLogout;
+    private javax.swing.JMenuItem tabReproductor;
+    private javax.swing.JMenuItem tabSalir;
     private javax.swing.JMenu tabVideos;
     private javax.swing.JTextField txtArtista;
     private javax.swing.JTextField txtNombre;

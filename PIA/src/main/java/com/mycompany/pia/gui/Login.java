@@ -33,6 +33,7 @@ public class Login extends javax.swing.JFrame {
         txtPassword = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Inicio de sesión");
 
         lblTitulo.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         lblTitulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
