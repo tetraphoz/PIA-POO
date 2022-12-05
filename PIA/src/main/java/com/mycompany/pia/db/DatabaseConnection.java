@@ -1,4 +1,4 @@
-package com.mycompany.pia;
+package com.mycompany.pia.db;
 
 import java.io.FileInputStream;
 import java.io.IOException;

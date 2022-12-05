@@ -1,5 +1,7 @@
-package com.mycompany.pia;
+package com.mycompany.pia.db;
 
+import com.mycompany.pia.Usuario;
+import com.mycompany.pia.db.DatabaseConnection;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -17,9 +19,7 @@ public class UsuarioManager {
     public UsuarioManager() {
         try {
             this.conn = new DatabaseConnection().getConnection();
-        } catch (IOException ex) {
-            Logger.getLogger(UsuarioManager.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SQLException ex) {
+        } catch (IOException | SQLException ex) {
             Logger.getLogger(UsuarioManager.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
@@ -27,9 +27,9 @@ public class UsuarioManager {
     public void crearUsuario(Usuario u) {
         try {
             stmnt = conn.prepareStatement("INSERT INTO user (email, username, password) VALUES (?,?,?)");
-            stmnt.setString(1, u.email);
-            stmnt.setString(2, u.username);
-            stmnt.setString(3, u.password);
+            stmnt.setString(1, u.getEmail());
+            stmnt.setString(2, u.getUsername());
+            stmnt.setString(3, u.getPassword());
             stmnt.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(UsuarioManager.class.getName()).log(Level.SEVERE, null, ex);
