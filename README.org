@@ -13,3 +13,10 @@ El código no tiene un nombre de usuario o contraseña default para la base de d
 Por favor modifique el archivo [[file:PIA/src/main/resources/config.properties]] con la informacion adequada.
 
 Solo debería ser necesario cambiar el nombre de usuario y contraseña si usaron las instrucciones para crear la base de datos.
+
+
+
+* Posibles mejoras
+** Cambiar el fondo de los frames para que se vean mejor
+** Poner una imagen en la ventana de inicio de sesion
+** Validar el registro de un usuario cada que se presiona una letra
