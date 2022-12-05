@@ -23,10 +23,10 @@ public class Clima {
 		String line;
 		try {
 			URL url = new URL("http://dataservice.accuweather.com/forecasts/v1/daily/1day/234445"
-				+ "?apikey=IuhQPk87THTwTuYGXBrc1dApZwFHAmgA&"
+				+ "?apikey=ZYE36y5Z3p40ajDHWxgeAle5CsMC9ZZ0&"
 				+ "language=es-mx&"
 				+ "details=false&"
-				+ "metric=false");
+				+ "metric=true");
 			con = (HttpURLConnection) url.openConnection();
 			con.setRequestMethod("GET");
 			con.setRequestProperty("Content-Type", "application/json");
