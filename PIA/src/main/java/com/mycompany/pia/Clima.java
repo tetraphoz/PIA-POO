@@ -23,7 +23,8 @@ public class Clima {
 		String line;
 		try {
 			URL url = new URL("http://dataservice.accuweather.com/forecasts/v1/daily/1day/234445"
-				+ "?apikey=ZYE36y5Z3p40ajDHWxgeAle5CsMC9ZZ0&"
+				// +"?apikey=Yy7ebZAAJt6Us4ZMEWrjrgGH5Nr0xKP1&" // llave buena
+				+ "?apikey=ZYE36y5Z3p40ajDHWxgeAle5CsMC9ZZ0&" // llave bloqueada
 				+ "language=es-mx&"
 				+ "details=false&"
 				+ "metric=true");
