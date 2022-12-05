@@ -107,6 +107,7 @@ public class VideoManager {
                         .setImagePath(Paths.get(rs.getString("imagePath")));
                 lista.add(vb.build());
             }
+            return lista;
         } catch (SQLException ex) {
             Logger.getLogger(VideoManager.class.getName()).log(Level.SEVERE, null, ex);
         }
