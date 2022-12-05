@@ -129,7 +129,7 @@ public class Login extends javax.swing.JFrame {
                     "Datos de login válidos", 1,
                     iconCheck48);
             this.dispose();
-            new Menu().setVisible(true);
+            new Inicio().setVisible(true);
         }
         else {
             JOptionPane.showMessageDialog(rootPane,
