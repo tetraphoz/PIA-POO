@@ -9,22 +9,23 @@ import javax.swing.Timer;
 
 public class Inicio extends javax.swing.JFrame {
 
-	public Inicio() {
-		initComponents();
-		Clima c = new Clima();
-		c.obtenerClima();
-		lblHora.setText("Clima Actual: "+ c.tempMaxima + " C°");
-		Timer t = new Timer(1000, updateClockAction);
-		t.start();
-	}
+        public Inicio() {
+                initComponents();
+                Clima c = new Clima();
+                c.obtenerClima();
+		
+                lblClima.setText("Clima Actual: " + c.tempMaxima + " C°");
+                Timer t = new Timer(1000, updateClockAction);
+                t.start();
+        }
 
-	ActionListener updateClockAction = new ActionListener() {
-		public void actionPerformed(ActionEvent e) {
-			Date fecha =  new Date();
-			SimpleDateFormat df = new SimpleDateFormat("kk:mm:ss");
-			lblHora.setText("Hora actual: " + df.format(fecha));
-		}
-	};
+        ActionListener updateClockAction = new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                        Date fecha = new Date();
+                        SimpleDateFormat df = new SimpleDateFormat("kk:mm:ss");
+                        lblHora.setText("Hora actual: " + df.format(fecha));
+                }
+        };
 
 	@SuppressWarnings("unchecked")
         // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
