@@ -96,16 +96,23 @@ public class VideoManager {
 
     public List<Video> cargarVideos(){
         VideoBuilder vb = new VideoBuilder();
-        var lista = new ArrayList<Video>();
+        List<Video> lista = new ArrayList<>();
         try {
             stmnt = conn.prepareStatement("SELECT * FROM video");
             rs = stmnt.executeQuery();
 
             while(rs.next()){
-                vb.setIdVideo(rs.getInt("idvideo")).setName(rs.getString("name")).setArtist(rs.getString("artist"))
-                        .setVideoPath(Paths.get(rs.getString("videoPath")))
-                        .setImagePath(Paths.get(rs.getString("imagePath")));
-                lista.add(vb.build());
+//                vb.setIdVideo(rs.getInt("idvideo")).setName(rs.getString("name")).setArtist(rs.getString("artist"))
+//                        .setVideoPath(Paths.get(rs.getString("videoPath")))
+//                        .setImagePath(Paths.get(rs.getString("imagePath")));
+//                lista.add(vb.build());
+                
+                Video v = new Video(rs.getInt("idvideo"),
+                              rs.getString("name"),
+                              rs.getString("artist"),
+                              Paths.get(rs.getString("videoPath")),
+                              Paths.get(rs.getString("imagePath")));
+                lista.add(v);
             }
             return lista;
         } catch (SQLException ex) {

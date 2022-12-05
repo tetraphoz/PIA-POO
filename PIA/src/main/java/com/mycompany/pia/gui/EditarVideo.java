@@ -282,7 +282,8 @@ public class EditarVideo extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void tabReproductorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tabReproductorActionPerformed
-        // TODO add your handling code here:
+        this.dispose();
+        new Reproductor().setVisible(true);
     }//GEN-LAST:event_tabReproductorActionPerformed
 
     private void tabAgregarVideoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tabAgregarVideoActionPerformed

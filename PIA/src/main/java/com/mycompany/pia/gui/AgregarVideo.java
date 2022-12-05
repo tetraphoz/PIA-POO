@@ -121,6 +121,11 @@ public class AgregarVideo extends javax.swing.JFrame {
 
         tabReproductor.setIcon(new javax.swing.ImageIcon(getClass().getResource("/video_icon.png"))); // NOI18N
         tabReproductor.setText("Reproductor de vídeos");
+        tabReproductor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tabReproductorActionPerformed(evt);
+            }
+        });
         tabVideos.add(tabReproductor);
 
         jMenuBar1.add(tabVideos);
@@ -262,6 +267,11 @@ public class AgregarVideo extends javax.swing.JFrame {
         this.dispose();
         new Inicio().setVisible(true);
     }//GEN-LAST:event_tabHomeActionPerformed
+
+    private void tabReproductorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tabReproductorActionPerformed
+        this.dispose();
+        new Reproductor().setVisible(true);
+    }//GEN-LAST:event_tabReproductorActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAgergarVideo;
