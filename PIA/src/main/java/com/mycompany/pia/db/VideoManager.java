@@ -74,6 +74,19 @@ public class VideoManager {
         }
     }
 
+    public boolean actualizarFavorito(Video v, boolean favorito) {
+        try {
+            stmnt = conn.prepareStatement("UPDATE video SET favorito = ? WHERE (idvideo = ?)");
+            stmnt.setBoolean(1, favorito);
+            stmnt.setInt(    2, v.getIdVideo());
+            stmnt.executeUpdate();
+            return true;
+        } catch (SQLException | NullPointerException ex) {
+            Logger.getLogger(UsuarioManager.class.getName()).log(Level.SEVERE, null, ex);
+            return false;
+        }
+    }
+
     public Video leerVideo(int id) {
         VideoBuilder vb = new VideoBuilder();
         try {
