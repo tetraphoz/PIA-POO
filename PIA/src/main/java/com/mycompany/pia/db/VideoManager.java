@@ -6,6 +6,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -22,9 +24,9 @@ public class VideoManager {
         try {
             this.conn = new DatabaseConnection().getConnection();
         } catch (IOException ex) {
-            Logger.getLogger(UsuarioManager.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(VideoManager.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
-            Logger.getLogger(UsuarioManager.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(VideoManager.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -37,31 +39,31 @@ public class VideoManager {
             stmnt.setString(4, v.getImagePath().toAbsolutePath().toString());
             stmnt.executeUpdate();
         } catch (SQLException ex) {
-            Logger.getLogger(UsuarioManager.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(VideoManager.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
     public void eliminarVideo(int id) {
         try {
-            stmnt = conn.prepareStatement("DELETE FROM video WHERE iduser = ?");
+            stmnt = conn.prepareStatement("DELETE FROM video WHERE idvideo = ?");
             stmnt.setInt(1, id);
             stmnt.executeUpdate();
         } catch (SQLException ex) {
-            Logger.getLogger(UsuarioManager.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(VideoManager.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
     public void actualizarVideo(Video v) {
         try {
-            stmnt = conn.prepareStatement("UPDATE user SET username");
-            stmnt.setInt(   1, v.getIdVideo());
-            stmnt.setString(2, v.getName());
-            stmnt.setString(3, v.getArtist());
-            stmnt.setString(4, v.getVideoPath().toAbsolutePath().toString());
-            stmnt.setString(5, v.getImagePath().toAbsolutePath().toString());
+            stmnt = conn.prepareStatement("UPDATE user SET name = ?, artist = ?, videoPath = ?, imagePath = ? WHERE idvideo = ?");
+            stmnt.setString(1, v.getName());
+            stmnt.setString(2, v.getArtist());
+            stmnt.setString(3, v.getVideoPath().toAbsolutePath().toString());
+            stmnt.setString(4, v.getImagePath().toAbsolutePath().toString());
+            stmnt.setInt(   5, v.getIdVideo());
             stmnt.executeUpdate();
         } catch (SQLException ex) {
-            Logger.getLogger(UsuarioManager.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(VideoManager.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -79,9 +81,28 @@ public class VideoManager {
                 return vb.build();
             }
         } catch (SQLException ex) {
-            Logger.getLogger(UsuarioManager.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(VideoManager.class.getName()).log(Level.SEVERE, null, ex);
         }
 
+        return null;
+    }
+
+    public List<Video> leerCatalogo(){
+        VideoBuilder vb = new VideoBuilder();
+        var lista = new ArrayList<Video>();
+        try {
+            stmnt = conn.prepareStatement("SELECT * FROM video");
+            rs = stmnt.executeQuery();
+
+            while(rs.next()){
+                vb.setIdVideo(rs.getInt("idvideo")).setName(rs.getString("name")).setArtist(rs.getString("artist"))
+                        .setVideoPath(Paths.get(rs.getString("videoPath")))
+                        .setImagePath(Paths.get(rs.getString("imagePath")));
+                lista.add(vb.build());
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(VideoManager.class.getName()).log(Level.SEVERE, null, ex);
+        }
         return null;
     }
 }
