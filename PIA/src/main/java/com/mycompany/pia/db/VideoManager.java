@@ -33,11 +33,12 @@ public class VideoManager {
 
     public boolean crearVideo(Video v) {
         try {
-            stmnt = conn.prepareStatement("INSERT INTO video (name, artist, videoPath, imagePath) VALUES (?,?,?,?)");
+            stmnt = conn.prepareStatement("INSERT INTO video (name, artist, videoPath, imagePath, favorito) VALUES (?,?,?,?,?)");
             stmnt.setString(1, v.getName());
             stmnt.setString(2, v.getArtist());
             stmnt.setString(3, v.getVideoPath().toAbsolutePath().toString());
             stmnt.setString(4, v.getImagePath().toAbsolutePath().toString());
+            stmnt.setBoolean(5, v.getIsFavorite());
             stmnt.executeUpdate();
             return true;
         } catch (SQLException | NullPointerException ex) {

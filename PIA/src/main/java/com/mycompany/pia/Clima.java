@@ -8,23 +8,23 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
 import org.json.JSONObject;
 
 public class Clima {
 	private JSONObject obj;
 	public float tempMinima;
 	public float tempMaxima;
-
 	public void obtenerClima(){
 		HttpURLConnection con = null;
 		StringBuilder responseContent = new StringBuilder();
 		BufferedReader reader;
 		String line;
 		try {
-			URL url = new URL("http://dataservice.accuweather.com/forecasts/v1/daily/1day/234445"
-				// +"?apikey=Yy7ebZAAJt6Us4ZMEWrjrgGH5Nr0xKP1&" // llave buena
-				+ "?apikey=ZYE36y5Z3p40ajDHWxgeAle5CsMC9ZZ0&" // llave bloqueada
+                	// "?apikey=Yy7ebZAAJt6Us4ZMEWrjrgGH5Nr0xKP1&" // llave buena
+		        // "?apikey=ZYE36y5Z3p40ajDHWxgeAle5CsMC9ZZ0&" // llave bloqueada	
+                    
+                        URL url = new URL("http://dataservice.accuweather.com/forecasts/v1/daily/1day/234445"
+				+ "?apikey=Yy7ebZAAJt6Us4ZMEWrjrgGH5Nr0xKP1&"
 				+ "language=es-mx&"
 				+ "details=false&"
 				+ "metric=true");
@@ -57,7 +57,6 @@ public class Clima {
 		} finally {
 			con.disconnect();
 		}
-		
 	}
 	
 	private void parse(String responseBody) {
@@ -73,7 +72,6 @@ public class Clima {
 			.getJSONObject("Temperature")
 			.getJSONObject("Maximum")
 			.getFloat("Value");
-		
 	}
 	
 }

@@ -73,7 +73,8 @@ public class Video {
                 name,
                 artist,
                 videoPath.toAbsolutePath().toString(),
-                imagePath.toAbsolutePath().toString()
+                imagePath.toAbsolutePath().toString(),
+                isFavorite
             };
             return oo;
         }

@@ -24,6 +24,7 @@ public class EditarVideo extends javax.swing.JFrame {
     private JFileChooser fileChooser = new JFileChooser();
     private Path videoPath = null;
     private Path imagePath = null;
+    private boolean isFav = false;
     
     public EditarVideo() {
         initComponents();
@@ -304,6 +305,7 @@ public class EditarVideo extends javax.swing.JFrame {
                 txtArtista.setText(v.getArtist());
                 videoPath = v.getVideoPath();
                 imagePath = v.getImagePath();
+                isFav = v.getIsFavorite();
             }
         }
     }//GEN-LAST:event_cbxIDVideoItemStateChanged
@@ -328,7 +330,7 @@ public class EditarVideo extends javax.swing.JFrame {
         int id = Integer.parseInt(cbxIDVideo.getSelectedItem().toString());
         String name = txtNombre.getText();
         String artist = txtArtista.getText();
-        Video v = new Video(id, name, artist, videoPath, imagePath, false);
+        Video v = new Video(id, name, artist, videoPath, imagePath, isFav);
 
         if(vm.actualizarVideo(v)) {    
             JOptionPane.showMessageDialog(rootPane,
@@ -345,9 +347,6 @@ public class EditarVideo extends javax.swing.JFrame {
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
         int id = Integer.parseInt(cbxIDVideo.getSelectedItem().toString());
-        String name = txtNombre.getText();
-        String artist = txtArtista.getText();
-        Video v = new Video(id, name, artist, videoPath, imagePath, false);
 
         if(vm.eliminarVideo(id)) {    
             JOptionPane.showMessageDialog(rootPane,
