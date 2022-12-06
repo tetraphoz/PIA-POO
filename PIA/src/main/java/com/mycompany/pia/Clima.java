@@ -24,6 +24,7 @@ public class Clima {
 		        // "?apikey=ZYE36y5Z3p40ajDHWxgeAle5CsMC9ZZ0&" // llave bloqueada	
                     
                         URL url = new URL("http://dataservice.accuweather.com/forecasts/v1/daily/1day/234445"
+				+ "?apikey=ZYE36y5Z3p40ajDHWxgeAle5CsMC9ZZ0&" // llave bloqueada	
 				+ "?apikey=Yy7ebZAAJt6Us4ZMEWrjrgGH5Nr0xKP1&"
 				+ "language=es-mx&"
 				+ "details=false&"
